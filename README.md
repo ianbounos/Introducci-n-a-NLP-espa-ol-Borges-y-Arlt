@@ -1,5 +1,5 @@
 # Introducción-a-NLP-español-Borges-y-Arlt
-Usamos a modo de ejemplo textos de Borges y Arlt para aplicar técnicas básicas de procesamiento del lenguaje natural a textos en español. El conjunto de datos utilizado en este proyecto fue obtenido de [este repositorio](https://github.com/karen-pal/borges). En el script [Borges-Arlt-Script.R](Borges-Arlt-Script.R)
+Usamos a modo de ejemplo textos de Borges y Arlt para aplicar técnicas básicas de procesamiento del lenguaje natural a textos en español. El conjunto de datos utilizado en este proyecto fue obtenido de [este repositorio](https://github.com/karen-pal/borges) a cuya autora agradezco. En el script [Borges-Arlt-Script.R](Borges-Arlt-Script.R)
  encontramos las siguientes acciones:
 
 1. Importamos los corpus de textos.
