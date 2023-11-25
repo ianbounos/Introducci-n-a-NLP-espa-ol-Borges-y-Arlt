@@ -21,10 +21,7 @@ archivoborges <- read_csv("C:/Users/ian bounos/OneDrive/Escritorio/DISCURSOS CRI
 archivoborges$autor = rep("Borges",nrow(archivoborges))
 archivoarlt <- read_csv("C:/Users/ian bounos/OneDrive/Escritorio/DISCURSOS CRISTINA/archivoarlt.csv")
 archivoarlt$autor = rep("Arlt",nrow(archivoarlt))
-archivocortazar <- read_csv("C:/Users/ian bounos/OneDrive/Escritorio/DISCURSOS CRISTINA/archivocortazar.csv")
-archivocortazar$autor = rep("Cortazar",nrow(archivocortazar))
 
-### Para ilustrar alguan
 
 
 textos = rbind(archivoborges,archivoarlt)
@@ -33,7 +30,7 @@ textos$link <- str_extract(textos$link, "([^/]+)/$")
 tidy_books = textos %>% unnest_tokens(word, text)
 tidy_books_borges = tidy_books %>% filter(autor=="Borges")
 tidy_books_arlt = tidy_books %>% filter(autor=="Arlt")
-tidy_books_cortazar = tidy_books %>% filter(autor=="Cortazar")
+# quitamos stopwords
 tidy_books_limpio = tidy_books%>%  filter(!word %in% stopwords("es") )    
 
 
@@ -43,7 +40,7 @@ tidy_books_limpio = tidy_books%>%  filter(!word %in% stopwords("es") )
 # Gráfico 1
 plot1 <- tidy_books_borges %>%
   count(word, sort = TRUE) %>%
-  top_n(40) %>%
+  top_n(15) %>%
   mutate(word = reorder(word, n)) %>%
   ggplot(aes(n, word)) +
   geom_col() +
@@ -55,7 +52,7 @@ plot1 <- tidy_books_borges %>%
 # Gráfico 2
 plot2 <- tidy_books_arlt %>%
   count(word, sort = TRUE) %>%
-  top_n(40) %>%
+  top_n(15) %>%
   mutate(word = reorder(word, n)) %>%
   ggplot(aes(n, word)) +
   geom_col() +
@@ -134,7 +131,7 @@ tf_matrix <-tidy_books_limpio2 %>%
   cast_sparse(link, word, n)  # Crear la matriz TF esparsa
 
 # Visualizar la matriz TF haciendo reducción de dimensión con PCA
-res.pca = prcomp(tf_matrix)#,scale=TRUE)
+res.pca = prcomp(tf_matrix,scale=TRUE)
 
 autor = substr( rownames(res.pca$x),1,1)=="B"
 autor
